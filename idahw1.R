@@ -87,6 +87,8 @@ cor(databp$recovtime, databp$bloodp, use = "complete")
 mean(databp$recovtime, na.rm = TRUE)
 recovtime_mi <- ifelse(is.na(databp$recovtime), 19.27273, databp$recovtime)
 sd(recovtime_mi)
+sse1 = sd(recovtime_mi)/sqrt(length(ind))
+sse1
 cor(recovtime_mi,databp$logdose)
 cor(recovtime_mi,databp$bloodp)
 
@@ -95,6 +97,8 @@ fit <- lm(recovtime ~ logdose+bloodp, data = databp)
 predicted_ri <- predict(fit, newdata = databp)
 recovtime_ri <- ifelse(is.na(databp$recovtime), predicted_ri, databp$recovtime)
 sd(recovtime_ri)
+sse2 = sd(recovtime_ri)/sqrt(length(ind))
+sse2
 cor(recovtime_ri,databp$logdose)
 cor(recovtime_ri,databp$bloodp)
 
@@ -102,6 +106,8 @@ cor(recovtime_ri,databp$bloodp)
 predicted_sri <- predict(fit, newdata = databp) + rnorm(nrow(databp), 0, sigma(fit))
 recovtime_sri <- ifelse(is.na(databp$recovtime), predicted_sri, databp$recovtime)
 sd(recovtime_sri)
+sse3 = sd(recovtime_sri)/sqrt(length(ind))
+sse3
 cor(recovtime_sri,databp$logdose)
 cor(recovtime_sri,databp$bloodp)
 
@@ -137,6 +143,8 @@ for (i in recovtime_){
 }
 recovtime_hotdeck <- c(recovtime_[1:3],donor1,recovtime_[4:8],donor2,recovtime_[9:19],donor3,recovtime_[20:22])
 sd(recovtime_hotdeck)
+sse4 = sd(recovtime_hotdeck)/sqrt(length(ind))
+sse4
 cor(recovtime_hotdeck,databp$logdose)
 cor(recovtime_hotdeck,databp$bloodp)
 
